@@ -585,7 +585,7 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             liff.init({
-                liffId: '2005254357-zKma9BZk'
+                liffId: '2006377601-BWadbvyJ'
             }).then(() => {
                 console.log('LIFF初期化成功');
             }).catch((err) => {
@@ -1111,26 +1111,6 @@ else if (count === 0) {
 
     cell.setAttribute('data-date', slotStart.toISOString());
 }
-
-    // ×と×の間のセル数が3未満の場合、その間のセルを×にする
-    for (let j = 0; j < times.length - 1; j++) {
-        let start = -1;
-        let end = -1;
-
-        // ×の開始位置を見つける
-        if (table.rows[j].cells[i + 1].textContent === '✕') {
-            start = j;
-        }
-
-        // その次の×を見つける
-        for (let k = j + 1; k < times.length; k++) {
-            if (table.rows[k].cells[i + 1].textContent === '✕') {
-                end = k;
-                break;
-            }
-        }
-
-    }
     }
     
         }
