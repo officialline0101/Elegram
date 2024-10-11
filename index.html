@@ -1070,37 +1070,47 @@ for (let i = 0; i < 7; i++) {
             return acc;
         }, 0);
 
-        // 営業日のイベント時間内に他のイベントがある場合
-        if (isBusinessEventTime && count > 0) {
-            cell.textContent = '✕';
-            cell.classList.add('unavailable');
-        }
-        // 営業日のイベント時間（他のイベントがない場合）
-        else if (isBusinessEventTime) {
-            cell.textContent = '◯';
-            cell.classList.add('available');
-        }
-        // 営業日で、指定されている時間以外の時間は×
-        else if (businessEventTimes.length > 0) {
-            cell.textContent = '✕';
-            cell.classList.add('unavailable');
-        }
-        // 営業日でかつ他のイベントがない場合
-        else if (isBusinessDay && count === 0) {
-            cell.textContent = '◯';
-            cell.classList.add('available');
-        }
-        // それ以外の条件
-        else if (count === 0) {
-            cell.textContent = '◯';
-            cell.classList.add('available');
-        } else {
-            cell.textContent = '✕';
-            cell.classList.add('unavailable');
-        }
+// 2つ以上のイベントがある場合
+if (count >= 2) {
+    cell.textContent = '✕';
+    cell.classList.add('unavailable');
+}
+// 1つのイベントがある場合
+else if (count === 1) {
+    cell.textContent = '◯';
+    cell.classList.add('available');
+}
+// 営業日のイベント時間内に他のイベントがある場合
+else if (isBusinessEventTime && count > 0) {
+    cell.textContent = '✕';
+    cell.classList.add('unavailable');
+}
+// 営業日のイベント時間（他のイベントがない場合）
+else if (isBusinessEventTime) {
+    cell.textContent = '◯';
+    cell.classList.add('available');
+}
+// 営業日で、指定されている時間以外の時間は×
+else if (businessEventTimes.length > 0) {
+    cell.textContent = '✕';
+    cell.classList.add('unavailable');
+}
+// 営業日でかつ他のイベントがない場合
+else if (isBusinessDay && count === 0) {
+    cell.textContent = '◯';
+    cell.classList.add('available');
+}
+// それ以外の条件
+else if (count === 0) {
+    cell.textContent = '◯';
+    cell.classList.add('available');
+} else {
+    cell.textContent = '✕';
+    cell.classList.add('unavailable');
+}
 
-        cell.setAttribute('data-date', slotStart.toISOString());
-    }
+    cell.setAttribute('data-date', slotStart.toISOString());
+}
 
     // ×と×の間のセル数が3未満の場合、その間のセルを×にする
     for (let j = 0; j < times.length - 1; j++) {
@@ -1120,20 +1130,6 @@ for (let i = 0; i < 7; i++) {
             }
         }
 
-        // ×と×の間のセル数が3未満の場合、その間のセルを×に変更
-        if (end !== -1 && end - start < 4) {
-            for (let k = start + 1; k < end; k++) {
-                const cell = table.rows[k].cells[i + 1];
-                cell.textContent = '✕';
-                cell.classList.remove('available');
-                cell.classList.add('unavailable');
-            }
-        }
-
-        // 次のループで位置を調整
-        if (end !== -1) {
-            j = end - 1; 
-        }
     }
     }
     
