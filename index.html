@@ -611,7 +611,6 @@ function updateDisplayInfo() {
     const visitCountText = visitCount ? `・<span style="color:red;"><strong>ご来店回数</strong></span>：${visitCount}` : '・来店回数が未選択です';
     const manorwomanText = manorwomanCount ? `・<span style="color:red;"><strong>ご性別</strong></span>：${manorwomanCount}` : '・ご性別が未選択です';
     const irradiationsText = irradiationsCount ? `・<span style="color:red;"><strong>コース</strong></span>：${irradiationsCount}` : '・コースが未選択です';
-    const totalAmountText = `・<span style="color:red;"><strong>合計金額</strong></span>：¥${menuPrice + optionsPrice}`;
     const selectedDateText = selectedFullDate ? `・<span style="color:red;"><strong>希望日時</strong></span>：${selectedFullDate}` : '・日時が未選択です'; // 日付が未選択の場合のメッセージを追加
 
 
@@ -626,8 +625,6 @@ function updateDisplayInfo() {
         <p>${irradiationsText}</p>
         <hr>
         <p>${selectedDateText}</p>
-        <hr>
-        <p>${totalAmountText}</p>
         <hr>
     `;
 }
