@@ -836,6 +836,393 @@
             fetchAvailability(currentDate);
         });
 
+        // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
+        let visitTimes = {
+            '1回目': 30,
+            '2回目以降': 0
+        };
+
+        let selectedVisitTime = 0; // 訪問回数で選択された時間
+
+        // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
+        let irradiationsTimes = {
+    'ベーシックコース〈30分〉': 30,
+    'スピードコース〈90分〉': 90,
+    '小顔矯正リフトアップコース': 30,
+    '小顔矯正エラ張りコース': 30,
+    '小顔矯正脂肪分解ECSコース': 60,
+    '小顔矯正肩こりスッキリコース': 40,
+    '小顔矯正顔筋リフトアップコース': 50,
+    '強炭酸・ガリレオピーリング': 40,
+    '毛穴ケアつるんと美肌コース': 60,
+    '究極の美白コース': 60,
+    'ニキビ・ニキビ跡ケアコース': 60,
+    'しみ・くすみ・たるみ・毛穴ケアコース': 60,
+    'アンチエイジング 幹細胞培養液導入コース': 60,
+    '敏感肌・赤みピーリング (クリスティーナUNSTRESS)': 60,
+    '美白・透明感ピーリング (クリスティーナILLUSTRIOUS)': 60,
+    '皮脂抑制・毛穴デトックスピーリング (クリスティーナBIOPHYTO)': 60,
+    '女優肌シルク肌ピーリング (クリスティーナSILK)': 60,
+    '本格的肌再生ピーリング (剥離あり・クリスティーナROSEDEMER)': 40,
+    '本格的肌再生ピーリング (剥離少し・ハーブリプロ)': 60,
+    'エクソソーム72時間肌再生ピーリング (剥離なし・エピダーマルスキン)': 40,
+    '毛穴洗浄コース': 40,
+    '毛穴黒ずみピーリングコース': 40,
+    '毛穴引き締め美容液導入コース': 60,
+    'シミ部分コース': 30,
+    'シミ全体コース': 40,
+    'シミW打ちコース': 40,
+    'ニキビ部分コース': 30,
+    'ニキビ全体コース': 40,
+    'ニキビW打ちコース': 40,
+    '赤ら顔部分コース': 30,
+    '赤ら顔全体コース': 40,
+    '赤ら顔W打ちコース': 40,
+    '若返り全体コース': 40,
+    'Y字・円盤ブロープ×ハンドECS': 60,
+    'Y字ブロープ×ハンドECS': 40,
+    '円盤ブロープ×ハンドECS': 40,
+    'Y字ブロープ': 40,
+    '円盤ブロープ': 40,
+    'Y字・円盤ブロープ': 50,
+    'ハンドECS': 40,
+    '美脚痩身 下半身コース': 60,
+    '二の腕・背中・脇集中コース': 60,
+    '下腹ポッコリ・お腹くびれコース': 60,
+    'ポッコリお腹メソッド骨格矯正コース': 40,
+    '本気の全身スリムコース': 120,
+    '美尻エステコース': 60,
+    '打たない肩ボトックス': 50,
+    '猫背矯正・肩張り歪み改善コース': 40,
+    '肩こり腰痛改善コース': 40,
+    '自律神経改善コース': 40,
+    '骨盤矯正コース': 30,
+    '全身美矯正コース': 60,
+    '育乳痩せ型コース': 40,
+    '育乳理想のバストアップコース': 40,
+    '上半身スッキリバストアップコース': 60,
+    '髭脱毛一式': 30,
+    '髭・脇・腕セット脱毛': 40,
+    'VIO脱毛': 30,
+    '全身脱毛(顔・VIOなし)SHR': 90,
+    '全身脱毛(顔・VIOなし)SHR.IPL': 100,
+    '全身脱毛(顔・VIOあり)SHR': 110,
+    '全身脱毛(顔・VIOあり)SHR.IPL': 120,
+    'Sパーツ脱毛': 20,
+    'Mパーツ脱毛': 30,
+    'Lパーツ脱毛': 30,
+    'VIOコース': 30,
+    '顔脱毛コース': 30,
+    '選べるパーツ3か所脱毛': 50,
+    '選べるパーツ5か所脱毛': 60,
+    '全身脱毛(顔・VIOなし)': 60,
+    '全身脱毛(顔のみ含む)': 70,
+    '全身脱毛(顔無し・VIO有)': 90,
+    '全身脱毛(顔・VIO有)': 100,
+    'おでこ': 15,
+    '眉・眉周り': 15,
+    '鼻(小鼻)': 15,
+    '鼻下': 15,
+    '口まわり': 15,
+    'あご・あご下': 15,
+    'ほほ': 15,
+    'もみあげ(フェイスライン)': 15,
+    'うなじ': 15,
+    'ワキ': 15,
+    '両腕(ALL)': 60,
+    '両肘下': 40,
+    '背中': 60,
+    '背中(上部)': 40,
+    'おしり': 40,
+    '両足(ALL)': 90,
+    '両膝下': 60,
+    'フェイシャルWAX': 60,
+    '鼻毛': 30,
+    'VIO': 60,
+    'IO': 40,
+    'VI': 40,
+    'V': 30,
+    'I': 30,
+    'O': 30,
+    'まずはお試しコース': 30,
+    '挙式直前1DAYコース': 120,
+    '二の腕ほっそり 1ヶ月スリム集中ケアコース': 90,
+    '二の腕ほっそり 3ヶ月スリム集中ケアコース': 90,
+    '眉毛スタイリング': 30,
+    '眉毛スタイリング×WAX': 60,
+    '照射15分×2回': 40,
+    '照射15分×3回': 60,
+    '発汗 ダイエット むくみ改善': 60,
+    '美肌効果 エイジング 肌トラブル改善': 60,
+    '不眠 鬱 ストレス改善': 60,
+    '妊活 フェムケア女性特有のお悩み改善': 60,
+    '温活 腸活 腸内環境の整え 便秘改善': 60,
+    '骨格美人矯正×全身よもぎ蒸し': 100,
+    'よもぎ蒸し×全身オイルリンパ': 90,
+    'とりあえず予約フェイシャルメニュー': 90,
+    'とりあえず予約ボディーメニュー': 90,
+    'とりあえず予約バストアップメニュー': 90,
+    'とりあえず予約男性光脱毛': 90,
+    'とりあえず予約女性光脱毛': 90,
+    'とりあえず予約WAX脱毛': 90,
+    'とりあえず予約眉毛メニュー': 60,
+    'とりあえず予約 よもぎ蒸し・オイルリンパ': 90
+        };
+
+        let selectedirradiationsTime = 0; // 訪問回数で選択された時間
+
+        let menuTimes = {
+    'ベーシックコース〈30分〉': 30,
+    'スピードコース〈90分〉': 90,
+    '小顔矯正リフトアップコース': 30,
+    '小顔矯正エラ張りコース': 30,
+    '小顔矯正脂肪分解ECSコース': 60,
+    '小顔矯正肩こりスッキリコース': 40,
+    '小顔矯正顔筋リフトアップコース': 50,
+    '強炭酸・ガリレオピーリング': 40,
+    '毛穴ケアつるんと美肌コース': 60,
+    '究極の美白コース': 60,
+    'ニキビ・ニキビ跡ケアコース': 60,
+    'しみ・くすみ・たるみ・毛穴ケアコース': 60,
+    'アンチエイジング 幹細胞培養液導入コース': 60,
+    '敏感肌・赤みピーリング (クリスティーナUNSTRESS)': 60,
+    '美白・透明感ピーリング (クリスティーナILLUSTRIOUS)': 60,
+    '皮脂抑制・毛穴デトックスピーリング (クリスティーナBIOPHYTO)': 60,
+    '女優肌シルク肌ピーリング (クリスティーナSILK)': 60,
+    '本格的肌再生ピーリング (剥離あり・クリスティーナROSEDEMER)': 40,
+    '本格的肌再生ピーリング (剥離少し・ハーブリプロ)': 60,
+    'エクソソーム72時間肌再生ピーリング (剥離なし・エピダーマルスキン)': 40,
+    '毛穴洗浄コース': 40,
+    '毛穴黒ずみピーリングコース': 40,
+    '毛穴引き締め美容液導入コース': 60,
+    'シミ部分コース': 30,
+    'シミ全体コース': 40,
+    'シミW打ちコース': 40,
+    'ニキビ部分コース': 30,
+    'ニキビ全体コース': 40,
+    'ニキビW打ちコース': 40,
+    '赤ら顔部分コース': 30,
+    '赤ら顔全体コース': 40,
+    '赤ら顔W打ちコース': 40,
+    '若返り全体コース': 40,
+    'Y字・円盤ブロープ×ハンドECS': 60,
+    'Y字ブロープ×ハンドECS': 40,
+    '円盤ブロープ×ハンドECS': 40,
+    'Y字ブロープ': 40,
+    '円盤ブロープ': 40,
+    'Y字・円盤ブロープ': 50,
+    'ハンドECS': 40,
+    '美脚痩身 下半身コース': 60,
+    '二の腕・背中・脇集中コース': 60,
+    '下腹ポッコリ・お腹くびれコース': 60,
+    'ポッコリお腹メソッド骨格矯正コース': 40,
+    '本気の全身スリムコース': 120,
+    '美尻エステコース': 60,
+    '打たない肩ボトックス': 50,
+    '猫背矯正・肩張り歪み改善コース': 40,
+    '肩こり腰痛改善コース': 40,
+    '自律神経改善コース': 40,
+    '骨盤矯正コース': 30,
+    '全身美矯正コース': 60,
+    '育乳痩せ型コース': 40,
+    '育乳理想のバストアップコース': 40,
+    '上半身スッキリバストアップコース': 60,
+    '髭脱毛一式': 30,
+    '髭・脇・腕セット脱毛': 40,
+    'VIO脱毛': 30,
+    '全身脱毛(顔・VIOなし)SHR': 90,
+    '全身脱毛(顔・VIOなし)SHR.IPL': 100,
+    '全身脱毛(顔・VIOあり)SHR': 110,
+    '全身脱毛(顔・VIOあり)SHR.IPL': 120,
+    'Sパーツ脱毛': 20,
+    'Mパーツ脱毛': 30,
+    'Lパーツ脱毛': 30,
+    'VIOコース': 30,
+    '顔脱毛コース': 30,
+    '選べるパーツ3か所脱毛': 50,
+    '選べるパーツ5か所脱毛': 60,
+    '全身脱毛(顔・VIOなし)': 60,
+    '全身脱毛(顔のみ含む)': 70,
+    '全身脱毛(顔無し・VIO有)': 90,
+    '全身脱毛(顔・VIO有)': 100,
+    'おでこ': 15,
+    '眉・眉周り': 15,
+    '鼻(小鼻)': 15,
+    '鼻下': 15,
+    '口まわり': 15,
+    'あご・あご下': 15,
+    'ほほ': 15,
+    'もみあげ(フェイスライン)': 15,
+    'うなじ': 15,
+    'ワキ': 15,
+    '両腕(ALL)': 60,
+    '両肘下': 40,
+    '背中': 60,
+    '背中(上部)': 40,
+    'おしり': 40,
+    '両足(ALL)': 90,
+    '両膝下': 60,
+    'フェイシャルWAX': 60,
+    '鼻毛': 30,
+    'VIO': 60,
+    'IO': 40,
+    'VI': 40,
+    'V': 30,
+    'I': 30,
+    'O': 30,
+    'まずはお試しコース': 30,
+    '挙式直前1DAYコース': 120,
+    '二の腕ほっそり 1ヶ月スリム集中ケアコース': 90,
+    '二の腕ほっそり 3ヶ月スリム集中ケアコース': 90,
+    '眉毛スタイリング': 30,
+    '眉毛スタイリング×WAX': 60,
+    '照射15分×2回': 40,
+    '照射15分×3回': 60,
+    '発汗 ダイエット むくみ改善': 60,
+    '美肌効果 エイジング 肌トラブル改善': 60,
+    '不眠 鬱 ストレス改善': 60,
+    '妊活 フェムケア女性特有のお悩み改善': 60,
+    '温活 腸活 腸内環境の整え 便秘改善': 60,
+    '骨格美人矯正×全身よもぎ蒸し': 100,
+    'よもぎ蒸し×全身オイルリンパ': 90,
+    'とりあえず予約フェイシャルメニュー': 90,
+    'とりあえず予約ボディーメニュー': 90,
+    'とりあえず予約バストアップメニュー': 90,
+    'とりあえず予約男性光脱毛': 90,
+    'とりあえず予約女性光脱毛': 90,
+    'とりあえず予約WAX脱毛': 90,
+    'とりあえず予約眉毛メニュー': 60,
+    'とりあえず予約 よもぎ蒸し・オイルリンパ': 90
+};
+
+        let selectedMenuTime = 0;
+
+        let BodyMenuTimes = {
+    'ベーシックコース〈30分〉': 30,
+    'スピードコース〈90分〉': 90,
+    '小顔矯正リフトアップコース': 30,
+    '小顔矯正エラ張りコース': 30,
+    '小顔矯正脂肪分解ECSコース': 60,
+    '小顔矯正肩こりスッキリコース': 40,
+    '小顔矯正顔筋リフトアップコース': 50,
+    '強炭酸・ガリレオピーリング': 40,
+    '毛穴ケアつるんと美肌コース': 60,
+    '究極の美白コース': 60,
+    'ニキビ・ニキビ跡ケアコース': 60,
+    'しみ・くすみ・たるみ・毛穴ケアコース': 60,
+    'アンチエイジング 幹細胞培養液導入コース': 60,
+    '敏感肌・赤みピーリング (クリスティーナUNSTRESS)': 60,
+    '美白・透明感ピーリング (クリスティーナILLUSTRIOUS)': 60,
+    '皮脂抑制・毛穴デトックスピーリング (クリスティーナBIOPHYTO)': 60,
+    '女優肌シルク肌ピーリング (クリスティーナSILK)': 60,
+    '本格的肌再生ピーリング (剥離あり・クリスティーナROSEDEMER)': 40,
+    '本格的肌再生ピーリング (剥離少し・ハーブリプロ)': 60,
+    'エクソソーム72時間肌再生ピーリング (剥離なし・エピダーマルスキン)': 40,
+    '毛穴洗浄コース': 40,
+    '毛穴黒ずみピーリングコース': 40,
+    '毛穴引き締め美容液導入コース': 60,
+    'シミ部分コース': 30,
+    'シミ全体コース': 40,
+    'シミW打ちコース': 40,
+    'ニキビ部分コース': 30,
+    'ニキビ全体コース': 40,
+    'ニキビW打ちコース': 40,
+    '赤ら顔部分コース': 30,
+    '赤ら顔全体コース': 40,
+    '赤ら顔W打ちコース': 40,
+    '若返り全体コース': 40,
+    'Y字・円盤ブロープ×ハンドECS': 60,
+    'Y字ブロープ×ハンドECS': 40,
+    '円盤ブロープ×ハンドECS': 40,
+    'Y字ブロープ': 40,
+    '円盤ブロープ': 40,
+    'Y字・円盤ブロープ': 50,
+    'ハンドECS': 40,
+    '美脚痩身 下半身コース': 60,
+    '二の腕・背中・脇集中コース': 60,
+    '下腹ポッコリ・お腹くびれコース': 60,
+    'ポッコリお腹メソッド骨格矯正コース': 40,
+    '本気の全身スリムコース': 120,
+    '美尻エステコース': 60,
+    '打たない肩ボトックス': 50,
+    '猫背矯正・肩張り歪み改善コース': 40,
+    '肩こり腰痛改善コース': 40,
+    '自律神経改善コース': 40,
+    '骨盤矯正コース': 30,
+    '全身美矯正コース': 60,
+    '育乳痩せ型コース': 40,
+    '育乳理想のバストアップコース': 40,
+    '上半身スッキリバストアップコース': 60,
+    '髭脱毛一式': 30,
+    '髭・脇・腕セット脱毛': 40,
+    'VIO脱毛': 30,
+    '全身脱毛(顔・VIOなし)SHR': 90,
+    '全身脱毛(顔・VIOなし)SHR.IPL': 100,
+    '全身脱毛(顔・VIOあり)SHR': 110,
+    '全身脱毛(顔・VIOあり)SHR.IPL': 120,
+    'Sパーツ脱毛': 20,
+    'Mパーツ脱毛': 30,
+    'Lパーツ脱毛': 30,
+    'VIOコース': 30,
+    '顔脱毛コース': 30,
+    '選べるパーツ3か所脱毛': 50,
+    '選べるパーツ5か所脱毛': 60,
+    '全身脱毛(顔・VIOなし)': 60,
+    '全身脱毛(顔のみ含む)': 70,
+    '全身脱毛(顔無し・VIO有)': 90,
+    '全身脱毛(顔・VIO有)': 100,
+    'おでこ': 15,
+    '眉・眉周り': 15,
+    '鼻(小鼻)': 15,
+    '鼻下': 15,
+    '口まわり': 15,
+    'あご・あご下': 15,
+    'ほほ': 15,
+    'もみあげ(フェイスライン)': 15,
+    'うなじ': 15,
+    'ワキ': 15,
+    '両腕(ALL)': 60,
+    '両肘下': 40,
+    '背中': 60,
+    '背中(上部)': 40,
+    'おしり': 40,
+    '両足(ALL)': 90,
+    '両膝下': 60,
+    'フェイシャルWAX': 60,
+    '鼻毛': 30,
+    'VIO': 60,
+    'IO': 40,
+    'VI': 40,
+    'V': 30,
+    'I': 30,
+    'O': 30,
+    'まずはお試しコース': 30,
+    '挙式直前1DAYコース': 120,
+    '二の腕ほっそり 1ヶ月スリム集中ケアコース': 90,
+    '二の腕ほっそり 3ヶ月スリム集中ケアコース': 90,
+    '眉毛スタイリング': 30,
+    '眉毛スタイリング×WAX': 60,
+    '照射15分×2回': 40,
+    '照射15分×3回': 60,
+    '発汗 ダイエット むくみ改善': 60,
+    '美肌効果 エイジング 肌トラブル改善': 60,
+    '不眠 鬱 ストレス改善': 60,
+    '妊活 フェムケア女性特有のお悩み改善': 60,
+    '温活 腸活 腸内環境の整え 便秘改善': 60,
+    '骨格美人矯正×全身よもぎ蒸し': 100,
+    'よもぎ蒸し×全身オイルリンパ': 90,
+    'とりあえず予約フェイシャルメニュー': 90,
+    'とりあえず予約ボディーメニュー': 90,
+    'とりあえず予約バストアップメニュー': 90,
+    'とりあえず予約男性光脱毛': 90,
+    'とりあえず予約女性光脱毛': 90,
+    'とりあえず予約WAX脱毛': 90,
+    'とりあえず予約眉毛メニュー': 60,
+    'とりあえず予約 よもぎ蒸し・オイルリンパ': 90
+};
+
+        let selectBodyMenuTime = 0;
+
         function scrollToElement(elementId) {
             var targetElement = document.getElementById(elementId);
             if (targetElement) {
@@ -854,6 +1241,10 @@
             const irradiationsText = irradiationsCount ? `・<span style="color:red;"><strong>コース</strong></span>：${irradiationsCount}` : '・コースが未選択です';
             const selectedDateText = selectedFullDate ? `・<span style="color:red;"><strong>希望日時</strong></span>：${selectedFullDate}` : '・日時が未選択です'; // 日付が未選択の場合のメッセージを追加
 
+            // 所要時間を計算
+            let totalMinutes = selectedMenuTime + selectedirradiationsTime + selectBodyMenuTime + selectedVisitTime;
+            let hours = Math.floor(totalMinutes / 60);
+            let minutes = totalMinutes % 60;
 
             // displayInfo要素に情報を表示
             document.getElementById('displayInfo').innerHTML = `
@@ -893,7 +1284,7 @@
             });
         });
 
-function selectBodyMenu(button) {
+        function selectBodyMenu(button) {
     // 親要素である .menu-section を取得
     const menuSection = button.closest('.menu-section');
 
@@ -915,26 +1306,49 @@ function selectBodyMenu(button) {
 
     // 選択されたコースを更新
     irradiationsCount = symptomName;
+
+    // 合計時間の設定
+    let totalirradiationsTime = 0;  // 合計時間をリセット
+    const irradiationTime = irradiationsTimes[symptomName] || 0; // 各オプションの時間を取得
+    totalirradiationsTime += irradiationTime;
+
+    // selectedirradiationsTimeに合計時間を設定
+    selectedirradiationsTime = totalirradiationsTime;
+    console.log('選択されたオプションの合計時間:', selectedirradiationsTime);
+
+            // カレンダーを更新するために取得する日付を渡す
+            fetchAvailability(currentDate);
+
     updateDisplayInfo();
 }
 
-        function selectSymptom(button) {
-            // 全ボタンの選択をリセット
-            const buttons = document.querySelectorAll('.symptoms button');
-            buttons.forEach(btn => btn.classList.remove('active'));
+function selectSymptom(button) {
+    // 全ボタンの選択をリセット
+    const buttons = document.querySelectorAll('.symptoms button');
+    buttons.forEach(btn => btn.classList.remove('active'));
 
-            // クリックされたボタンを選択状態に
-            button.classList.add('active');
+    // クリックされたボタンを選択状態に
+    button.classList.add('active');
 
-            // 選択されたメニューの名前と価格を取得
-            const symptomName = button.textContent;  // ボタンのテキストを取得
-            selectedSymptom = [symptomName];  // 選択されたメニュー名を配列として保存
-            menuPrice = parseInt(button.getAttribute('data-price'), 10);  // メニューの価格を取得
+                // 選択されたオプションを取得
+                const updatedSelectedButtons = document.querySelectorAll('.symptoms button.active');
 
-            // 全てのirradiationsを非表示にする
-            document.querySelectorAll('.irradiations').forEach(section => {
-                section.style.display = 'none';
-            });
+    // 選択されたメニューの名前と価格を取得
+    const symptomName = button.textContent;  // ボタンのテキストを取得
+    selectedSymptom = [symptomName];  // 選択されたメニュー名を配列として保存
+    menuPrice = parseInt(button.getAttribute('data-price'), 10);  // メニューの価格を取得
+
+    // 選択されたメニューの時間を取得して保存
+    selectedMenuTime = menuTimes[symptomName] || 0;  // メニュー時間を取得して保存
+    console.log('選択されたメニューの時間:', selectedMenuTime);
+
+    // カレンダーを更新するために取得する日付を渡す
+    fetchAvailability(currentDate);
+
+    // 全てのirradiationsを非表示にする
+    document.querySelectorAll('.irradiations').forEach(section => {
+        section.style.display = 'none';
+    });
 
             // 選択された症状に応じたirradiationsを表示し、スクロール先を設定
             if (symptomName === "小顔輪郭矯正") {
@@ -973,40 +1387,69 @@ function selectBodyMenu(button) {
             element.classList.add('active');
             visitCount = element.innerText;
 
+            // 選択された訪問回数に対応する時間を取得
+            selectedVisitTime = visitTimes[visitCount];
+
+            console.log('選択された訪問回数の時間:', selectedVisitTime);
+
+            // カレンダーを更新するために取得する日付を渡す
+            fetchAvailability(currentDate);
+
             // メニューにスクロール
             scrollToElement('menuSections');
         }
 
         function selectirradiations(element) {
-            // 今クリックされたボタンのグループの中にある全ボタンをゲットするよ✨
-            const irradiationsButtons = element.parentNode.querySelectorAll('button');
+    // 今クリックされたボタンのグループの中にある全ボタンをゲットするよ✨
+    const irradiationsButtons = element.parentNode.querySelectorAll('button');
 
-            // 全部のボタンから 'active' っていうクラス（選ばれてるよ～ってやつ）を消しちゃうね💅
-            irradiationsButtons.forEach(button => {
-                button.classList.remove('active');
-            });
+    // 選択されたオプションを取得
+    const selectedButtons = document.querySelectorAll('.irradiations button.active');
+    const selectedIrradiations = Array.from(selectedButtons).map(btn => btn.innerText);
+    irradiationsCount = selectedIrradiations.join(', ');
 
-            // クリックされたボタンを選択状態にして 'active' を追加するよ💖
-            element.classList.add('active');
+    // 全部のボタンから 'active' っていうクラス（選ばれてるよ～ってやつ）を消しちゃうね💅
+    irradiationsButtons.forEach(button => {
+        button.classList.remove('active');
+    });
 
-            // ボタンのテキスト（コース名）を取得して変数に保存するの📋
-            const selectedCourse = element.textContent;  // 選ばれたコース名をゲット
-            irradiationsCount = selectedCourse;  // コース名を `irradiationsCount` に保存
+    // クリックされたボタンを選択状態にして 'active' を追加するよ💖
+    element.classList.add('active');
 
-            // ボタンに隠されてるデータ属性 `data-price` から価格を取得するよ💸
-            const selectedPrice = parseInt(element.getAttribute('data-price'), 10);  // 値段は数値に変換して保存
-            menuPrice = selectedPrice;  // 価格を `menuPrice` に保存しておくの
+    // ボタンのテキスト（コース名）を取得して変数に保存するの📋
+    const selectedCourse = element.textContent;  // 選ばれたコース名をゲット
+    irradiationsCount = selectedCourse;  // コース名を `irradiationsCount` に保存
 
-            // デバッグ用にコンソールにコース名と価格を表示して確認しとくわよ～💅
-            console.log("選ばれたコースは: ", selectedCourse);
-            console.log("選ばれたコースの値段は: ", selectedPrice);
+    // ボタンに隠されてるデータ属性 `data-price` から価格を取得するよ💸
+    const selectedPrice = parseInt(element.getAttribute('data-price'), 10);  // 値段は数値に変換して保存
+    menuPrice = selectedPrice;  // 価格を `menuPrice` に保存しておくの
 
-            // 選ばれたメニューの名前を配列に入れておくよ✨（今は一つだけど、将来的に複数選べるかも⁉）
-            irradiationsCount = [selectedCourse];  // 配列にしとくことで、あとで他のデータも簡単に追加できるよね💖
+    // デバッグ用にコンソールにコース名と価格を表示して確認しとくわよ～💅
+    console.log("選ばれたコースは: ", selectedCourse);
+    console.log("選ばれたコースの値段は: ", selectedPrice);
 
-            // UIとか合計金額を更新するために、`updateDisplayInfo()`を呼び出して表示もちゃんと整えるよ📱
-            updateDisplayInfo();
-        }
+    // 選ばれたメニューの名前を配列に入れておくよ✨（今は一つだけど、将来的に複数選べるかも⁉）
+    irradiationsCount = [selectedCourse];  // 配列にしとくことで、あとで他のデータも簡単に追加できるよね💖
+
+    // 合計時間の計算
+    let totalirradiationsTime = 0;  // 全オプションの合計時間をリセット
+    selectedButtons.forEach(btn => {
+        const irradiationName = btn.innerText;
+        const irradiationTime = irradiationsTimes[irradiationName] || 0;
+        totalirradiationsTime += irradiationTime;
+    });
+
+    // 合計時間を selectedirradiationsTime に設定
+    selectedirradiationsTime = totalirradiationsTime;
+    console.log('選択されたオプションの合計時間:', selectedirradiationsTime);
+
+    // カレンダーを更新するために、取得した日付を渡す
+    fetchAvailability(currentDate);
+
+    // UIとか合計金額を更新するために、`updateDisplayInfo()`を呼び出して表示もちゃんと整えるよ📱
+    updateDisplayInfo();
+}
+
 
         function updateTotalAmount() {
             totalAmount = menuPrice + optionsPrice; // オプションの価格も含める
@@ -1287,11 +1730,42 @@ function selectBodyMenu(button) {
 
                 for (let j = 0; j < times.length; j++) {
                     const cell = table.rows[j].cells[i + 1];
+
+                    // すでにセルが✕の場合はスキップする
+                    if (cell.textContent === '✕') {
+                        continue;
+                    }
+
                     const slotStart = new Date(day);
                     slotStart.setHours(parseInt(times[j].split(':')[0]), parseInt(times[j].split(':')[1]), 0, 0);
 
                     const slotEnd = new Date(slotStart);
-                    slotEnd.setMinutes(slotStart.getMinutes() + 30);
+                    let menuDuration = selectedMenuTime || 15;
+                    let BodymenuDuration = selectBodyMenuTime || 15;
+                    let visitDuration = selectedVisitTime || 0;
+                    let irradiationsDuration = selectedirradiationsTime || 0;
+
+                    // メニュー時間と訪問回数の時間を合計して、終了時間を設定
+                    slotEnd.setMinutes(slotStart.getMinutes() + menuDuration + visitDuration + BodymenuDuration + irradiationsDuration);
+
+                    // 18時以降に終了する予約を不可にする (17:30は可)
+                    if (slotEnd.getHours() === 19 && slotEnd.getMinutes() > 0) {
+                        cell.textContent = '✕';
+                        cell.classList.add('unavailable');
+                        continue;
+                    } else if (slotEnd.getHours() > 19) {
+                        cell.textContent = '✕';
+                        cell.classList.add('unavailable');
+                        continue;
+                    }
+
+                    // ここで終了時間を使った条件処理を行う
+                    // 例えば、リアルタイムで既に過ぎた時間帯は×にする
+                    if (slotStart < now) {
+                        cell.textContent = '✕';
+                        cell.classList.add('unavailable');
+                        continue;
+                    }
 
                     const isBusinessDay = businessDays.some(businessDay => {
                         const businessDayStart = new Date(businessDay.start);
@@ -1312,7 +1786,6 @@ function selectBodyMenu(button) {
                         }
                         return acc;
                     }, 0);
-
 
                     // リアルタイムで過ぎた時間のセルを×にする条件
                     if (slotStart < now) {
