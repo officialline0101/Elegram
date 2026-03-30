@@ -15,7 +15,7 @@
             /* さらに右へ */
             top: 80%;
             /* 画面中央に固定 */
-            transform: translateY(-50%) translateX(10px);
+            transform: translateY(-50%) translateX(16px);
             /* 中央配置と右ずらし */
             background: #cab8d9;
             display: flex;
@@ -96,7 +96,7 @@
             background-color: #fdfdfd;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 90%;
+            width: 96%;
             max-width: 500px;
             padding: 25px;
             box-sizing: border-box;
@@ -1503,6 +1503,9 @@
         <div class="label" id="menuLabel">メニューをお選びください<span class="required">必須</span></div>
         <div class="info-text">※メニューを選択すると<br>空き状況のカレンダーが表示されます</div>
         <div class="menu-sections" id="menuSections">
+            <button type="button" onclick="showMenu('syokai9')">イットリフト</button>
+            <button type="button" onclick="showMenu('syokai10')">プラズマニア</button>
+            <button type="button" onclick="showMenu('syokai11')">瞬間小顔ECS</button>
             <button type="button" onclick="showMenu('syokai1')">小顔矯正リフトアップ</button>
             <button type="button" onclick="showMenu('syokai2')">美肌脱毛</button>
             <button type="button" onclick="showMenu('syokai3')">お悩み別ピーリング</button>
@@ -1511,6 +1514,9 @@
             <button type="button" onclick="showMenu('syokai6')">リラクゼーション</button>
             <button type="button" onclick="showMenu('syokai7')">眉毛スタイリング</button>
             <button type="button" onclick="showMenu('syokai8')">ブライダルエステ</button>
+            <button type="button" onclick="showMenu('nikaimeikou9')">イットリフト</button>
+            <button type="button" onclick="showMenu('nikaimeikou10')">プラズマニア</button>
+            <button type="button" onclick="showMenu('nikaimeikou11')">瞬間小顔ECS</button>
             <button type="button" onclick="showMenu('nikaimeikou1')">小顔矯正リフトアップ</button>
             <button type="button" onclick="showMenu('nikaimeikou2')">美肌脱毛</button>
             <button type="button" onclick="showMenu('nikaimeikou3')">お悩み別ピーリング</button>
@@ -1765,6 +1771,82 @@
                 <button type="button" onclick="selectSymptom(this, 'treatment112')" data-price="14800">背中ニキビ美白コース</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment113')" data-price="4400">フェイシャル×ボディーコース</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment114')" data-price="3300">歯のホワイトニング</button>
+            </div>
+        </div>
+
+        <!-- 初回：イットリフト -->
+        <div id="syokai9" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">初回<br>◆イットリフト◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this, 'treatment115')" data-price="33000">全顔コース</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment116')" data-price="22000">下半顔コース</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment117')" data-price="13500">ほうれい線コース</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment118')" data-price="13500">フェイスラインコース</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment119')" data-price="8800">目元周り集中コース</button>
+            </div>
+        </div>
+
+        <!-- 初回：プラズマニア -->
+        <div id="syokai10" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">初回<br>◆プラズマニア◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this, 'treatment120')" data-price="13200">プラズマニア全顔(60分)1回</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment121')" data-price="8800">プラズマニア部分ケア(30分)</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment122')" data-price="11000">プラズマニアセット</button>
+            </div>
+        </div>
+
+        <!-- 初回：瞬間小顔ECS -->
+        <div id="syokai11" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">初回<br>◆瞬間小顔ECS◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this, 'treatment123')" data-price="8800">瞬間小顔ECSコース(30分)</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment124')" data-price="14300">瞬間小顔ECSコース(40分)</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment125')" data-price="19800">瞬間小顔ECSコース(60分)</button>
+            </div>
+        </div>
+
+        <!-- 2回目以降：イットリフト -->
+        <div id="nikaimeikou9" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">2回目以降<br>◆イットリフト◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this, 'treatment126')" data-price="38500">全顔コース</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment127')" data-price="27500">下半顔コース</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment128')" data-price="16500">ほうれい線コース</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment129')" data-price="16500">フェイスラインコース</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment130')" data-price="11000">目元周り集中コース</button>
+            </div>
+        </div>
+
+        <!-- 2回目以降：プラズマニア -->
+        <div id="nikaimeikou10" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">2回目以降<br>◆プラズマニア◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this, 'treatment131')" data-price="22000">プラズマニア全顔(60分)1回</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment132')" data-price="13200">プラズマニア部分ケア(30分)</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment133')" data-price="11000">プラズマニアセット</button>
+            </div>
+        </div>
+
+        <!-- 2回目以降：瞬間小顔ECS -->
+        <div id="nikaimeikou11" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">2回目以降<br>◆瞬間小顔ECS◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this, 'treatment134')" data-price="11000">瞬間小顔ECSコース(30分)</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment135')" data-price="22000">瞬間小顔ECSコース(40分)</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment136')" data-price="33000">瞬間小顔ECSコース(60分)</button>
             </div>
         </div>
 
@@ -3305,6 +3387,182 @@ function createTreatmentContent(title, imageUrl, description, price, time) {
                     '料金：5,500円',
                     ''
                 );
+            } else if (treatmentId === 'treatment115') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    'おでこ、目元〜顎下、首までのコース<br>※ウルトラエレクトロポーション付き(高分子美容成分を20倍浸透)',
+                    '初回料金：33,000円<br>2回目以降：38,500円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment116') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    '顎、二重顎、首までのコース<br>※ウルトラエレクトロポーション付き(高分子美容成分を20倍浸透)',
+                    '初回料金：22,000円<br>2回目以降：27,500円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment117') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    'ほうれい線が気になる方に特におすすめのコース',
+                    '初回料金：13,500円<br>2回目以降：16,500円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment118') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    'フェイスラインが気になる方に特におすすめのコース',
+                    '初回料金：13,500円<br>2回目以降：16,500円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment119') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    '目元周りのたるみなどが気になる方に特におすすめのコース',
+                    '初回料金：8,800円<br>2回目以降：11,000円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment120') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    '',
+                    '初回料金：13,200円<br>2回目以降：22,000円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment121') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    '',
+                    '初回料金：8,800円<br>2回目以降：13,200円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment122') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    '',
+                    '料金：11,000円<br>2回目以降：11,000円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment123') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    'Y字・円盤の2つの電流アプローチからお好きなものを1つお選びいただけます。',
+                    '初回料金：8,800円<br>2回目以降：11,000円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment124') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    'Y字・円盤・ハンドの3つの電流アプローチからお好きなものを2つお選びいただけます。',
+                    '初回料金：14,300円<br>2回目以降：22,000円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment125') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    'Y字・円盤・ハンドの3つの電流アプローチを受けられるスペシャルコースです。',
+                    '初回料金：19,800円<br>2回目以降：33,000円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment126') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    'おでこ、目元〜顎下、首までのコース<br>※ウルトラエレクトロポーション付き(高分子美容成分を20倍浸透)',
+                    '2回目以降：38,500円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment127') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    '顎、二重顎、首までのコース<br>※ウルトラエレクトロポーション付き(高分子美容成分を20倍浸透)',
+                    '2回目以降：27,500円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment128') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    'ほうれい線が気になる方に特におすすめのコース',
+                    '2回目以降：16,500円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment129') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    'フェイスラインが気になる方に特におすすめのコース',
+                    '2回目以降：16,500円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment130') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    '目元周りのたるみなどが気になる方に特におすすめのコース',
+                    '2回目以降：11,000円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment131') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    '',
+                    '2回目以降：22,000円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment132') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    '',
+                    '2回目以降：13,200円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment133') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    '',
+                    '料金：11,000円<br>2回目以降：11,000円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment134') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    'Y字・円盤の2つの電流アプローチからお好きなものを1つお選びいただけます。',
+                    '2回目以降：11,000円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment135') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    'Y字・円盤・ハンドの3つの電流アプローチからお好きなものを2つお選びいただけます。',
+                    '2回目以降：22,000円',
+                    ''
+                );
+            } else if (treatmentId === 'treatment136') {
+                treatmentText.innerHTML = createTreatmentContent(
+                    '',
+                    '',
+                    'Y字・円盤・ハンドの3つの電流アプローチを受けられるスペシャルコースです。',
+                    '2回目以降：33,000円',
+                    ''
+                );
             } else {
                 treatmentText.innerHTML = '';
             }
@@ -3437,6 +3695,9 @@ function createTreatmentContent(title, imageUrl, description, price, time) {
             });
 
             if (visitCount === '初回') {
+                document.querySelector('button[onclick="showMenu(\'syokai9\')"]').style.display = 'inline-block';
+                document.querySelector('button[onclick="showMenu(\'syokai10\')"]').style.display = 'inline-block';
+                document.querySelector('button[onclick="showMenu(\'syokai11\')"]').style.display = 'inline-block';
                 document.querySelector('button[onclick="showMenu(\'syokai1\')"]').style.display = 'inline-block';
                 document.querySelector('button[onclick="showMenu(\'syokai2\')"]').style.display = 'inline-block';
                 document.querySelector('button[onclick="showMenu(\'syokai3\')"]').style.display = 'inline-block';
@@ -3446,6 +3707,9 @@ function createTreatmentContent(title, imageUrl, description, price, time) {
                 document.querySelector('button[onclick="showMenu(\'syokai7\')"]').style.display = 'inline-block';
                 document.querySelector('button[onclick="showMenu(\'syokai8\')"]').style.display = 'inline-block';
             } else if (visitCount === '2回目以降') {
+                document.querySelector('button[onclick="showMenu(\'nikaimeikou9\')"]').style.display = 'inline-block';
+                document.querySelector('button[onclick="showMenu(\'nikaimeikou10\')"]').style.display = 'inline-block';
+                document.querySelector('button[onclick="showMenu(\'nikaimeikou11\')"]').style.display = 'inline-block';
                 document.querySelector('button[onclick="showMenu(\'nikaimeikou1\')"]').style.display = 'inline-block';
                 document.querySelector('button[onclick="showMenu(\'nikaimeikou2\')"]').style.display = 'inline-block';
                 document.querySelector('button[onclick="showMenu(\'nikaimeikou3\')"]').style.display = 'inline-block';
