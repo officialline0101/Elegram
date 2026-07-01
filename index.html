@@ -2605,7 +2605,7 @@ function formatDateTime(dateTimeString) {
             const contractCountText = contractCount ? `・<span style="color:#4a2d68;"><strong>契約の有無</strong></span>：${contractCount}` : '・契約していない';
             // メニューが選択されていたら、各メニューを改行して表示
             const selectedSymptomText = selectedSymptom.length > 0
-                ? `<span style="color:#4a2d68;"><strong>【メニュー】<span class="required">必ずご確認ください</span></strong></span><br>・${selectedSymptom.join('<br>')}`
+                ? `<span style="color:#4a2d68;"><strong>【メニュー】</strong></span><br><span class="required">必ずご確認ください</span><br>・${selectedSymptom.join('<br>')}`
                 : '・メニューが未選択です';
 
             // オプションが選択されていたら、各オプションを改行して表示
@@ -4387,10 +4387,16 @@ function submitForm() {
         formData.contractCount = '契約していない';
     }
 
+    // メニュー表記：クーポン選択時は「LINE限定クーポン【〇メニュー】」の形式にする
+    const isCoupon = !!localStorage.getItem('selectedCoupon');
+    const menuTextForLine = isCoupon
+        ? `LINE限定クーポン【${formData.selectedSymptom}】`
+        : `${formData.selectedSymptom}`;
+
     // LINEトークにメッセージを送信
     liff.sendMessages([{
         type: 'text',
-        text: `【予約フォーム】\n《お名前》${formData.name}\n《電話番号》\n${formData.phone}\n《コース契約の有無》\n⇒${formData.contractCount}\n《ご来店回数》${formData.visitCount}\n\n《メニュー》\n${formData.selectedSymptom}\n\n《第一希望日》\n${formatDate(formData.dates[0])}\n\n《第二希望日》\n${formatDate(formData.dates[1])}\n\n《第三希望日》\n${formatDate(formData.dates[2])}\n\n《メッセージ》${formData.message}`
+        text: `【予約フォーム】\n《お名前》${formData.name}\n《電話番号》\n${formData.phone}\n《コース契約の有無》\n⇒${formData.contractCount}\n《ご来店回数》${formData.visitCount}\n\n《メニュー》\n${menuTextForLine}\n\n《第一希望日》\n${formatDate(formData.dates[0])}\n\n《第二希望日》\n${formatDate(formData.dates[1])}\n\n《第三希望日》\n${formatDate(formData.dates[2])}\n\n《メッセージ》${formData.message}`
     }]).then(() => {
         alert('ご予約ありがとうございます。確認次第、ご連絡差し上げます。');
         liff.closeWindow();
