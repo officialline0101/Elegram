@@ -1625,6 +1625,21 @@
             border-top:1px dashed var(--c-rule);
             padding-top:10px;
         }
+        .coupon-selected__clear{
+            margin-top:14px;
+            font-family:var(--f-sans);
+            font-size:13px; font-weight:600; letter-spacing:0.03em;
+            color:var(--c-gold-deep);
+            background:#fff;
+            border:1px solid var(--c-gold);
+            border-radius:999px;
+            padding:8px 20px;
+            cursor:pointer;
+            transition:background .2s, color .2s, transform .15s;
+        }
+        .coupon-selected__clear::before{ content:"✕ "; font-weight:700; }
+        .coupon-selected__clear:hover{ background:var(--c-gold); color:#fff; }
+        .coupon-selected__clear:active{ transform:scale(0.97); }
 
         /* ▼ 前回と同じ予約ボタン ▼ */
         .repeat-booking-wrapper #repeatBookingButton{
@@ -2426,25 +2441,40 @@
 
         // ④ 今月のLINE限定クーポン：ボタンを押すと、そのクーポンメニュー自体が選択状態になる
         //   （既存メニューを開くのではなく、「Aメニュー」「Bメニュー」というメニューがそのまま選ばれる）
+        // クーポン選択を解除して、通常メニューのカテゴリ一覧を再表示する
+        function clearCoupon() {
+            document.querySelectorAll('.coupon-btn.active').forEach(b => b.classList.remove('active'));
+            selectedSymptom = null;
+            selectedMenu = '';
+            selectedMenuTime = 0;
+            menuPrice = 0;
+
+            const treatmentText = document.getElementById('treatment-text');
+            if (treatmentText) {
+                treatmentText.classList.remove('is-coupon');
+                treatmentText.style.display = 'none';
+            }
+            localStorage.removeItem('selectedCoupon');
+
+            // カテゴリ一覧を再表示
+            document.getElementById('menuLabel').style.display = 'block';
+            document.getElementById('menuSections').style.display = 'block';
+
+            // カレンダーを閉じる
+            const calendarContainer = document.querySelector('.calendar-container');
+            if (calendarContainer) calendarContainer.style.display = 'none';
+
+            updateDisplayInfo();
+            fetchAvailability(currentDate);
+        }
+
         function applyCoupon(button) {
             const treatmentText = document.getElementById('treatment-text');
             const calendarContainer = document.querySelector('.calendar-container');
 
             // すでに選択中のボタンを再タップ → 選択解除
             if (button.classList.contains('active')) {
-                button.classList.remove('active');
-                selectedSymptom = null;
-                selectedMenu = '';
-                selectedMenuTime = 0;
-                menuPrice = 0;
-                if (treatmentText) {
-                    treatmentText.classList.remove('is-coupon');
-                    treatmentText.style.display = 'none';
-                }
-                localStorage.removeItem('selectedCoupon');
-                if (calendarContainer) calendarContainer.style.display = 'none';
-                updateDisplayInfo();
-                fetchAvailability(currentDate);
+                clearCoupon();
                 return;
             }
 
@@ -2454,6 +2484,9 @@
                 section.classList.remove('active');
                 section.querySelectorAll('button.active').forEach(btn => btn.classList.remove('active'));
             });
+            // クーポン選択中はカテゴリ一覧を非表示にする
+            document.getElementById('menuLabel').style.display = 'none';
+            document.getElementById('menuSections').style.display = 'none';
             // クーポンはA/Bどちらか1つだけ選択
             document.querySelectorAll('.coupon-btn').forEach(b => b.classList.remove('active'));
             button.classList.add('active');
@@ -2487,6 +2520,7 @@
                         <div class="coupon-selected__name"><span class="cs-check">✓</span>「<span class="cs-menu">${menuName}</span>」を選択中です</div>
                         ${metaHtml}
                         ${descHtml}
+                        <button type="button" class="coupon-selected__clear" onclick="clearCoupon()">選択を解除する</button>
                     </div>`;
                 treatmentText.style.display = 'block';
             }
@@ -2495,10 +2529,6 @@
             if (calendarContainer) calendarContainer.style.display = 'block';
             updateDisplayInfo();
             fetchAvailability(currentDate);
-
-            // 希望日時の入力欄へスクロール
-            const target = document.getElementById('placeholder1');
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         function applyPreviousSelection() {
