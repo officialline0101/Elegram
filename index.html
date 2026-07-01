@@ -4390,7 +4390,7 @@ function submitForm() {
     // メニュー表記：クーポン選択時は「LINE限定クーポン【〇メニュー】」の形式にする
     const isCoupon = !!localStorage.getItem('selectedCoupon');
     const menuTextForLine = isCoupon
-        ? `LINE限定クーポン【${formData.selectedSymptom}】`
+        ? `LINE限定クーポン\n【${formData.selectedSymptom}】`
         : `${formData.selectedSymptom}`;
 
     // LINEトークにメッセージを送信
