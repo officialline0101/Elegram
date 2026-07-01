@@ -1476,7 +1476,7 @@
             font-family:var(--f-sans);
             font-weight:300;
             background-color:var(--c-bg);
-            background-image:url("assets/img/texture-paper.jpg");
+            background-image:url("../assets/v2/hero/texture-paper.jpg");
             background-size:360px;
             background-blend-mode:multiply;
             color:var(--c-ink);
@@ -1499,7 +1499,7 @@
         h1{
             background:
                 linear-gradient(180deg, rgba(250,248,244,0.50) 0%, rgba(250,248,244,0.80) 62%, rgba(250,248,244,0.94) 100%),
-                url("assets/img/hero-booking.jpg") center top/cover no-repeat;
+                url("../assets/v2/hero/hero-booking.jpg") center top/cover no-repeat;
             color:var(--c-ink);
             margin:0 -26px 26px;
             padding:48px 20px 32px;
@@ -1525,7 +1525,105 @@
         @media (max-width:480px){ h1 .h1-jp{ font-size:20px; } }
         .hero-divider{
             display:block; height:24px; width:200px; max-width:60%; margin:12px auto 0;
-            background:url("assets/img/divider-ornament.png") center/contain no-repeat;
+            background:url("../assets/v2/decorations/divider-ornament.png") center/contain no-repeat;
+        }
+
+        /* ▼ 今月のLINE限定クーポン ▼ */
+        .coupon-wrapper{
+            margin:6px 0 18px;
+            padding:14px 14px 16px;
+            border:1px solid var(--c-gold);
+            border-radius:16px;
+            background:linear-gradient(180deg,#fffdf8,#fff);
+            box-shadow:0 4px 12px rgba(157,136,178,0.10);
+            text-align:center;
+        }
+        .coupon-title{
+            font-family:var(--f-serif);
+            font-size:16px; font-weight:700; letter-spacing:0.06em;
+            color:var(--c-ink);
+            margin-bottom:12px;
+        }
+        .coupon-title::before{ content:"🎁 "; }
+        .coupon-buttons{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:10px;
+        }
+        .coupon-buttons .coupon-btn{
+            font-family:var(--f-sans);
+            width:100%;
+            padding:13px 10px;
+            border-radius:999px;
+            font-size:15px; font-weight:700; letter-spacing:0.04em;
+            color:#fff;
+            border:none;
+            cursor:pointer;
+            transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
+        }
+        .coupon-buttons .coupon-a{
+            background:linear-gradient(135deg,#e8657a,#d23f5a);
+            box-shadow:0 4px 12px rgba(210,63,90,0.28);
+        }
+        .coupon-buttons .coupon-b{
+            background:linear-gradient(135deg,#5b8de0,#3a63c4);
+            box-shadow:0 4px 12px rgba(58,99,196,0.28);
+        }
+        .coupon-buttons .coupon-btn:hover{ transform:translateY(-1px); filter:brightness(1.03); }
+        .coupon-buttons .coupon-btn:active{ transform:scale(0.97); }
+        .coupon-buttons .coupon-btn.active{ outline:none; filter:brightness(1.02); }
+        .coupon-buttons .coupon-a.active{ box-shadow:0 0 0 3px #fff, 0 0 0 5px #d23f5a; }
+        .coupon-buttons .coupon-b.active{ box-shadow:0 0 0 3px #fff, 0 0 0 5px #3a63c4; }
+
+        /* ▼ クーポン選択中パネル（#treatment-text を専用表示に上書き） ▼ */
+        #treatment-text.is-coupon{
+            background:transparent;
+            border:none;
+            box-shadow:none;
+            padding:0;
+            margin-top:8px;
+        }
+        .coupon-selected{
+            position:relative;
+            border:1px solid var(--c-gold);
+            border-radius:16px;
+            background:linear-gradient(180deg,#fffdf8,#fff);
+            box-shadow:0 4px 14px rgba(97,61,133,0.12);
+            padding:16px 18px;
+            text-align:center;
+        }
+        .coupon-selected__badge{
+            display:inline-block;
+            font-family:var(--f-sans);
+            font-size:12px; font-weight:700; letter-spacing:0.06em;
+            color:#fff;
+            background:var(--c-gold);
+            border-radius:999px;
+            padding:4px 14px;
+            margin-bottom:10px;
+        }
+        .coupon-selected.is-a .coupon-selected__badge{ background:linear-gradient(135deg,#e8657a,#d23f5a); }
+        .coupon-selected.is-b .coupon-selected__badge{ background:linear-gradient(135deg,#5b8de0,#3a63c4); }
+        .coupon-selected__name{
+            font-family:var(--f-serif);
+            font-size:18px; font-weight:700; letter-spacing:0.03em;
+            color:var(--c-ink);
+            line-height:1.5;
+        }
+        .coupon-selected__name .cs-check{ color:#2e9e5b; margin-right:6px; font-weight:700; }
+        .coupon-selected__name .cs-menu{ color:var(--c-gold-deep); }
+        .coupon-selected__meta{
+            margin-top:10px;
+            font-family:var(--f-sans);
+            font-size:14px; color:var(--c-ink);
+        }
+        .coupon-selected__meta strong{ color:var(--c-gold-deep); font-weight:700; }
+        .coupon-selected__desc{
+            margin-top:12px;
+            font-family:var(--f-sans);
+            font-size:13px; color:var(--c-ink-sub); line-height:1.7;
+            border-top:1px dashed var(--c-rule);
+            padding-top:10px;
         }
 
         /* ▼ 前回と同じ予約ボタン ▼ */
@@ -1672,7 +1770,7 @@
           .decor{
             display:flex; flex-direction:column; align-items:center; text-align:center;
             position:sticky; top:0; height:100vh; padding:58px 44px; overflow:hidden;
-            background:linear-gradient(180deg,rgba(250,248,244,.28),rgba(238,232,243,.34) 50%,rgba(221,209,231,.42)),url("assets/img/hero-booking.jpg") center/cover no-repeat;
+            background:linear-gradient(180deg,rgba(250,248,244,.28),rgba(238,232,243,.34) 50%,rgba(221,209,231,.42)),url("../assets/v2/hero/hero-booking.jpg") center/cover no-repeat;
             border-right:1px solid #d9cbe8;
           }
           .decor .dmark{width:72px; margin:4px auto 4px;}
@@ -1733,24 +1831,38 @@
 
     <div class="book">
     <aside class="decor">
-        <img class="dmark" src="assets/img/mark-eg.png" alt="">
-        <img class="dlogo" src="assets/img/logo-elegram.png" alt="Elegram">
+        <img class="dmark" src="../assets/v2/decorations/mark-eg.png" alt="">
+        <img class="dlogo" src="../assets/v2/decorations/logo-elegram.png" alt="Elegram">
         <div class="dk">Esthetic Salon</div>
         <div class="dvl">Reservation</div>
         <h2 class="dtag">美しさは、<br>知性である。</h2>
         <p class="dlead">本質を見極め、あなたの内なる輝きを解き放つ。Elegram のエステティック体験。</p>
-        <img class="dorn" src="assets/img/divider-ornament.png" alt="">
-        <img class="dsprig" src="assets/img/sprig-olive.png" alt="">
+        <img class="dorn" src="../assets/v2/decorations/divider-ornament.png" alt="">
+        <img class="dsprig" src="../assets/v2/decorations/sprig-olive.png" alt="">
     </aside>
     <div class="bookmain">
     <div class="container">
         <h1>
-            <img src="assets/img/mark-eg.png" alt="" class="h1-mark">
-            <img src="assets/img/logo-elegram.png" alt="Elegram" class="brand-logo">
+            <img src="../assets/v2/decorations/mark-eg.png" alt="" class="h1-mark">
+            <img src="../assets/v2/decorations/logo-elegram.png" alt="Elegram" class="brand-logo">
             <span class="h1-label">RESERVATION</span>
             <span class="h1-jp">ご予約フォーム</span>
             <span class="hero-divider" aria-hidden="true"></span>
         </h1>
+        <!-- ④ 今月のLINE限定クーポン -->
+        <!-- ▼▼ 変更方法：ボタンの文言・data-menu（メニュー名）・data-price（料金/円）・data-time（所要時間/分）・data-desc（説明文）を書き換えてください ▼▼ -->
+        <div class="coupon-wrapper">
+            <div class="coupon-title">今月のLINE限定クーポン</div>
+            <div class="coupon-buttons">
+                <button type="button" id="couponA" class="coupon-btn coupon-a"
+                    onclick="applyCoupon(this)"
+                    data-menu="Aメニュー" data-price="0" data-time="0" data-desc="">Aメニュー</button>
+                <button type="button" id="couponB" class="coupon-btn coupon-b"
+                    onclick="applyCoupon(this)"
+                    data-menu="Bメニュー" data-price="0" data-time="0" data-desc="">Bメニュー</button>
+            </div>
+        </div>
+
         <!-- 追加するボタン -->
         <div class="repeat-booking-wrapper">
             <button type="button" id="repeatBookingButton" onclick="applyPreviousSelection()">
@@ -1772,8 +1884,8 @@
 
         <div class="label">来店回数<span class="required">必須</span></div>
         <div class="visit-buttons">
-            <button type="button" id="firstVisit" onclick="selectVisit(this)">初回</button>
-            <button type="button" id="repeatVisit" onclick="selectVisit(this)">2回目以降</button>
+            <button type="button" id="firstVisit" onclick="selectVisit(this)">ご新規様</button>
+            <button type="button" id="repeatVisit" onclick="selectVisit(this)">リピーター様</button>
         </div>
 
         <div class="labelmessezi">コース契約の有無<br>(契約コースで予約される方のみ<br>選択してください)</div>
@@ -1784,17 +1896,6 @@
         <div class="label" id="menuLabel">メニューをお選びください<span class="required">必須</span></div>
         <div class="info-text">※メニューを選択すると<br>空き状況のカレンダーが表示されます</div>
         <div class="menu-sections" id="menuSections">
-            <button type="button" onclick="showMenu('syokai9')">イットリフト</button>
-            <button type="button" onclick="showMenu('syokai10')">プラズマニア</button>
-            <button type="button" onclick="showMenu('syokai11')">瞬間小顔ECS</button>
-            <button type="button" onclick="showMenu('syokai1')">小顔矯正リフトアップ</button>
-            <button type="button" onclick="showMenu('syokai2')">美肌脱毛</button>
-            <button type="button" onclick="showMenu('syokai3')">お悩み別ピーリング</button>
-            <button type="button" onclick="showMenu('syokai4')">毛穴・肌質改善</button>
-            <button type="button" onclick="showMenu('syokai5')">ボディーエステ</button>
-            <button type="button" onclick="showMenu('syokai6')">リラクゼーション</button>
-            <button type="button" onclick="showMenu('syokai7')">眉毛スタイリング</button>
-            <button type="button" onclick="showMenu('syokai8')">ブライダルエステ</button>
             <button type="button" onclick="showMenu('nikaimeikou9')">イットリフト</button>
             <button type="button" onclick="showMenu('nikaimeikou10')">プラズマニア</button>
             <button type="button" onclick="showMenu('nikaimeikou11')">瞬間小顔ECS</button>
@@ -2175,7 +2276,7 @@
           <div class="summary-title">ご予約内容</div>
           <div class="summary-dash"></div>
           <div id="displayInfo"></div> <!-- ここに選択された情報を表示します -->
-          <img class="summary-sprig" src="assets/img/sprig-olive.png" alt="">
+          <img class="summary-sprig" src="../assets/v2/decorations/sprig-olive.png" alt="">
         </div>
 
         <button class="submit-button" onclick="submitForm()" div id="section-message">LINEで予約を送信</button>
@@ -2287,6 +2388,13 @@
 
             if (savedName) document.getElementById('name').value = savedName;
             if (savedPhone) document.getElementById('phone').value = savedPhone;
+
+            // ✅ 性別も前回の選択を復元（選択済みの状態にする）
+            const savedGender = localStorage.getItem('selectedGender');
+            if (savedGender) {
+                const genderBtn = document.getElementById(savedGender);
+                if (genderBtn) selectsecondanniversary(genderBtn);
+            }
         });
 
         // スムーズスクロール
@@ -2316,21 +2424,108 @@
             saveMenuSelection(menuType);
         }
 
+        // ④ 今月のLINE限定クーポン：ボタンを押すと、そのクーポンメニュー自体が選択状態になる
+        //   （既存メニューを開くのではなく、「Aメニュー」「Bメニュー」というメニューがそのまま選ばれる）
+        function applyCoupon(button) {
+            const treatmentText = document.getElementById('treatment-text');
+            const calendarContainer = document.querySelector('.calendar-container');
+
+            // すでに選択中のボタンを再タップ → 選択解除
+            if (button.classList.contains('active')) {
+                button.classList.remove('active');
+                selectedSymptom = null;
+                selectedMenu = '';
+                selectedMenuTime = 0;
+                menuPrice = 0;
+                if (treatmentText) {
+                    treatmentText.classList.remove('is-coupon');
+                    treatmentText.style.display = 'none';
+                }
+                localStorage.removeItem('selectedCoupon');
+                if (calendarContainer) calendarContainer.style.display = 'none';
+                updateDisplayInfo();
+                fetchAvailability(currentDate);
+                return;
+            }
+
+            // 既存メニュー側の選択状態をすべて解除（重複選択を防ぐ）
+            document.querySelectorAll('.menu-sections button.active').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.menu-section').forEach(section => {
+                section.classList.remove('active');
+                section.querySelectorAll('button.active').forEach(btn => btn.classList.remove('active'));
+            });
+            // クーポンはA/Bどちらか1つだけ選択
+            document.querySelectorAll('.coupon-btn').forEach(b => b.classList.remove('active'));
+            button.classList.add('active');
+
+            // クーポンメニューをそのまま選択メニューとして設定
+            const menuName = button.getAttribute('data-menu') || button.innerText;
+            menuPrice = parseInt(button.getAttribute('data-price'), 10) || 0;
+            selectedMenuTime = parseInt(button.getAttribute('data-time'), 10) || 0;
+            selectedMenu = menuName;
+            selectedSymptom = [menuName];
+
+            // 「前回と同じメニュー」で復元できるよう保存（他メニューのデータは消しておく）
+            localStorage.setItem('selectedCoupon', button.id);
+            localStorage.removeItem('selectedMenu');
+            localStorage.removeItem('selectedSymptoms');
+
+            // 「今月のLINE限定クーポンの〇〇を選択中です」を分かりやすく表示
+            const desc = button.getAttribute('data-desc') || '';
+            const variant = button.classList.contains('coupon-b') ? 'is-b' : 'is-a';
+            const metaParts = [];
+            if (menuPrice) metaParts.push(`料金 <strong>${menuPrice.toLocaleString()}円</strong>`);
+            if (selectedMenuTime) metaParts.push(`所要時間 <strong>${selectedMenuTime}分</strong>`);
+            const metaHtml = metaParts.length
+                ? `<div class="coupon-selected__meta">${metaParts.join('　／　')}</div>` : '';
+            const descHtml = desc ? `<div class="coupon-selected__desc">${desc}</div>` : '';
+            if (treatmentText) {
+                treatmentText.classList.add('is-coupon');
+                treatmentText.innerHTML = `
+                    <div class="coupon-selected ${variant}">
+                        <div class="coupon-selected__badge">今月のLINE限定クーポン</div>
+                        <div class="coupon-selected__name"><span class="cs-check">✓</span>「<span class="cs-menu">${menuName}</span>」を選択中です</div>
+                        ${metaHtml}
+                        ${descHtml}
+                    </div>`;
+                treatmentText.style.display = 'block';
+            }
+
+            // カレンダーを表示して更新
+            if (calendarContainer) calendarContainer.style.display = 'block';
+            updateDisplayInfo();
+            fetchAvailability(currentDate);
+
+            // 希望日時の入力欄へスクロール
+            const target = document.getElementById('placeholder1');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
         function applyPreviousSelection() {
+            const savedCoupon = localStorage.getItem('selectedCoupon');
             const savedMenu = localStorage.getItem('selectedMenu') || '';
             const savedSymptoms = JSON.parse(localStorage.getItem('selectedSymptoms') || '[]');
             const savedIrradiations = JSON.parse(localStorage.getItem('selectedIrradiations') || '[]');
 
-            if (!savedMenu && savedSymptoms.length === 0 && savedIrradiations.length === 0) {
+            if (!savedCoupon && !savedMenu && savedSymptoms.length === 0 && savedIrradiations.length === 0) {
                 alert('前回のメニューが見つかりません💦');
                 return;
             }
 
-    // ✅ ご来店回数（2回目以降）を自動で選択
+    // ✅ ご来店回数（リピーター様）を自動で選択
     const repeatVisitButton = document.getElementById('repeatVisit');
     if (repeatVisitButton) {
         selectVisit(repeatVisitButton);
     }
+
+            // ✅ 前回がクーポンメニューだった場合はそれを復元して終了
+            if (savedCoupon) {
+                const couponBtn = document.getElementById(savedCoupon);
+                if (couponBtn) {
+                    applyCoupon(couponBtn);
+                    return;
+                }
+            }
 
             // ✅ 前回の選択状態を初期化
             // 1. オプションの active クラスを全て外す
@@ -3918,6 +4113,9 @@ function createTreatmentContent(title, imageUrl, description, price, time) {
             element.classList.add('active');
             secondsecondanniversaryCount = element.innerText;
 
+            // ✅ 性別の選択をローカルストレージに保存（名前と同様に次回以降も選択済みで復元）
+            localStorage.setItem('selectedGender', element.id);
+
             // 選択された訪問回数に対応する時間を取得
             selectedsecondanniversaryTime = secondTimes[secondsecondanniversaryCount];
 
@@ -3957,68 +4155,38 @@ function createTreatmentContent(title, imageUrl, description, price, time) {
             updateDisplayInfo(); // 表示を更新
         }
 
-        // 初期状態でメニューセクションを非表示にする
-        document.getElementById('menuLabel').style.display = 'none';
-        document.getElementById('menuSections').style.display = 'none';
+        // メニューは来店回数の選択前から常に表示する（初回・2回目以降で分岐せず共通表示）
+        document.getElementById('menuLabel').style.display = 'block';
+        document.getElementById('menuSections').style.display = 'block';
 
         function selectVisit(element) {
-            // 訪問回数ボタンの選択状態をリセット
+            // 来店回数ボタンの選択状態をリセット
             document.getElementById('firstVisit').classList.remove('active');
             document.getElementById('repeatVisit').classList.remove('active');
 
             // クリックされたボタンを選択状態にする
             element.classList.add('active');
 
-            // 選択された訪問回数を変数に格納
+            // 選択された来店回数を変数に格納（ご新規様／リピーター様）
             visitCount = element.innerText;
 
-            // 性別が選択されたらメニューセクションを表示する
-            document.getElementById('menuLabel').style.display = 'block';
-            document.getElementById('menuSections').style.display = 'block';
+            // 選択された来店回数に対応する時間を取得
+            selectedVisitTime = visitTimes[visitCount] || 0;
 
-            // メニューの表示をリセット
-            document.querySelectorAll('.menu-sections button').forEach(button => {
-                button.style.display = 'none';
-            });
-
-            if (visitCount === '初回') {
-                document.querySelector('button[onclick="showMenu(\'syokai9\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'syokai10\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'syokai11\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'syokai1\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'syokai2\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'syokai3\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'syokai4\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'syokai5\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'syokai6\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'syokai7\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'syokai8\')"]').style.display = 'inline-block';
-            } else if (visitCount === '2回目以降') {
-                document.querySelector('button[onclick="showMenu(\'nikaimeikou9\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'nikaimeikou10\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'nikaimeikou11\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'nikaimeikou1\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'nikaimeikou2\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'nikaimeikou3\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'nikaimeikou4\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'nikaimeikou5\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'nikaimeikou6\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'nikaimeikou7\')"]').style.display = 'inline-block';
-                document.querySelector('button[onclick="showMenu(\'nikaimeikou8\')"]').style.display = 'inline-block';
-            }
-
-            // 選択された訪問回数に対応する時間を取得
-            selectedVisitTime = visitTimes[visitCount];
-
-            console.log('選択された訪問回数の時間:', selectedVisitTime);
+            console.log('選択された来店回数の時間:', selectedVisitTime);
 
             // カレンダーを更新するために取得する日付を渡す
             fetchAvailability(currentDate);
         }
 
 function showMenu(menu) {
-    // `treatment-text` を非表示にする
+    // `treatment-text` を非表示にする（クーポン専用表示も解除）
     document.getElementById("treatment-text").style.display = "none";
+    document.getElementById("treatment-text").classList.remove('is-coupon');
+
+    // 通常メニューへ切り替えたのでクーポンの選択は解除
+    document.querySelectorAll('.coupon-btn.active').forEach(b => b.classList.remove('active'));
+    localStorage.removeItem('selectedCoupon');
 
     // 選択されたメニューの名前を取得
     let selectedButton = document.querySelector(`.menu-sections button[onclick="showMenu('${menu}')"]`);
